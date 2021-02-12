@@ -36,7 +36,7 @@
   tags: firewalld
 
 - name: set firewalld zone source
-  firewalld:
+  ansible.posix.firewalld:
     zone: "{{ item.0.name }}"
     permanent: "{{ item.0.permanent|default('true') }}"
     immediate: "{{ item.0.immediate|default('true') }}"
@@ -57,7 +57,7 @@
   tags: firewalld
 
 - name: purge unconfigured firewalld service rules
-  firewalld:
+  ansible.posix.firewalld:
     service: "{{ item }}"
     permanent: true
     immediate: true
@@ -68,7 +68,7 @@
   tags: firewalld
 
 - name: set firewalld service rules
-  firewalld:
+  ansible.posix.firewalld:
     service: "{{ item.value.service | default(item.key) }}"
     permanent: "{{ item.value.permanent|default('true') }}"
     immediate: "{{ item.value.immediate|default('true') }}"
@@ -78,7 +78,7 @@
   tags: firewalld
 
 - name: set firewalld port rules
-  firewalld:
+  ansible.posix.firewalld:
     port: "{{ item.value.port }}/{{ item.value.protocol|default('tcp') }}"
     permanent: "{{ item.value.permanent|default('true') }}"
     immediate: "{{ item.value.immediate|default('true') }}"
@@ -88,7 +88,7 @@
   tags: firewalld
 
 - name: set firewalld rich rules
-  firewalld:
+  ansible.posix.firewalld:
     rich_rule: "{{ item.value.rule }}"
     permanent: "{{ item.value.permanent|default('true') }}"
     immediate: "{{ item.value.immediate|default('true') }}"
